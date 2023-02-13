@@ -29,6 +29,12 @@ This project, `the naeo-2023-api`, is a Java Spring Boot application that expose
 
 **This `the naeo-2023-api` was developed specifically as a teaching aid and should not be considered production ready.**
 
+### Latest Release
+
+The latest tagged version is:
+
+[![Release][release-shield]][releases-url]
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
@@ -149,6 +155,10 @@ Project Link: [https://github.com/kvanderscheer/naeo-2023-api](https://github.co
 [stars-url]: https://github.com/kvanderscheer/naeo-2023-api/stargazers
 
 [issues-shield]: https://img.shields.io/github/issues/kvanderscheer/naeo-2023-api.svg?style=for-the-badge
+
+[release-shield]: https://img.shields.io/github/v/tag/kvanderscheer/naeo-2023-api?style=for-the-badge
+
+[releases-url]: https://github.com/kvanderscheer/naeo-2023-api/releases
 
 [issues-url]: https://github.com/kvanderscheer/naeo-2023-api/issues
 

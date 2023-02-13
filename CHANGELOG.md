@@ -9,3 +9,8 @@
 
 ### Added or changed
 - Added README.md, CHANGELOG.md, and LICENSE.txt
+
+## v1.0.1
+
+### Added or changed
+- Updated README.md, .gitignore

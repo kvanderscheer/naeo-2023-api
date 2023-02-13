@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Exclude sample data ###
+src/main/resources/data.sql

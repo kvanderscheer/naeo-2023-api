@@ -4,6 +4,12 @@ server:
 spring:
   application:
     name: naeo-2023
+  datasource:
+    generate-unique-name: false
+    name: naeo-2023
+  h2:
+    console:
+      enabled: true
   sql:
     init:
       mode: always

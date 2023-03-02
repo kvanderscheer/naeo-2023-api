@@ -10,7 +10,7 @@
     </parent>
     <groupId>us.vanderscheer</groupId>
     <artifactId>naeo-2023</artifactId>
-    <version>1.0.4</version>
+    <version>1.0.5</version>
     <name>naeo-2023</name>
     <description>NAEO 2023 Conference API</description>
     <properties>

@@ -13,6 +13,7 @@ import us.vanderscheer.naeo2023.domain.dto.EventDTO;
 import us.vanderscheer.naeo2023.exception.ApiError;
 import us.vanderscheer.naeo2023.services.EventService;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -43,9 +44,12 @@ public class EventController {
     )
     @GetMapping
     List<EventDTO> getEvents(@RequestParam("calendar_id")
-                             @Parameter(description = "The ID of the calendar.")
-                             UUID calendarId) {
-        return eventService.getEvents(calendarId);
+                             @Parameter(description = "The ID of the calendar.") UUID calendarId,
+                             @RequestParam(value = "from_date", required = false)
+                             @Parameter(description = "The from (start) date of the events to retrieve.") LocalDate fromDate,
+                             @RequestParam(value = "to_date", required = false)
+                             @Parameter(description = "The to (end) date of the events to retrieve.")LocalDate toDate) {
+        return eventService.getEvents(calendarId, fromDate, toDate);
     }
 
     @Operation(

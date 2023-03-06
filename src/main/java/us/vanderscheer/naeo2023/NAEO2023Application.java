@@ -10,17 +10,18 @@ import io.swagger.v3.oas.annotations.servers.Server;
 import jakarta.annotation.PostConstruct;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 
 import java.util.TimeZone;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = { SecurityAutoConfiguration.class})
 @OpenAPIDefinition(
 		servers = {
 				@Server(url = "https://naeo2023api.vanderscheer.us"),
 				@Server(url = "http://localhost:8080")
 		},
 		info = @Info(title = "NAEO 2023 Conference Demo API",
-				version = "1.0", license =
+				version = "1.1", license =
 		@License(name = "MIT", url = "https://en.wikipedia.org/wiki/MIT_License"))
 )
 @SecurityScheme(name = "x-api-key", type = SecuritySchemeType.APIKEY, in = SecuritySchemeIn.HEADER)

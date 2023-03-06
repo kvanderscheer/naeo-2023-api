@@ -8,11 +8,9 @@ import java.util.UUID;
 
 public interface CommentDAO {
     List<Comment> selectAllComments();
+    List<Comment> selectCommentsByEntity(UUID entityId);
     Comment save(Comment comment);
-
     Optional<Comment> selectCommentById(UUID commentId);
-
     boolean existsById(UUID commentId);
-
     void deleteById(UUID commentId);
 }

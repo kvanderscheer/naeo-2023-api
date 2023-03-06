@@ -11,6 +11,7 @@ import us.vanderscheer.naeo2023.exception.RequestValidationException;
 import us.vanderscheer.naeo2023.exception.ResourceNotFoundException;
 import us.vanderscheer.naeo2023.repositories.CalendarDAO;
 import us.vanderscheer.naeo2023.repositories.CommentDAO;
+import us.vanderscheer.naeo2023.repositories.EventRepository;
 
 import java.util.Comparator;
 import java.util.List;
@@ -25,6 +26,7 @@ public class CommentService {
     private final CommentDAO commentsDAO;
     @Qualifier("jpaCalendar")
     private final CalendarDAO calendarDAO;
+    private final EventRepository eventRepository;
     private final CommentDTOMapper commentDTOMapper;
 
     public List<CommentDTO> getComments() {
@@ -35,17 +37,31 @@ public class CommentService {
                 .collect(Collectors.toList());
     }
 
+    public List<CommentDTO> getCommentsByEntity(UUID entityId) {
+        List<Comment> comments = commentsDAO.selectCommentsByEntity(entityId);
+        return comments
+                .stream()
+                .map(commentDTOMapper)
+                .sorted(Comparator.comparing(CommentDTO::created))
+                .collect(Collectors.toList());
+    }
+
+    public CommentDTO getCommentById(UUID commentId) {
+        return commentsDAO.selectCommentById(commentId)
+                .map(commentDTOMapper)
+                .orElseThrow(() -> new ResourceNotFoundException("comment with id [%s] not found".formatted(commentId)));
+    }
+
     public CommentDTO add(CommentAddRequest commentAddRequest) {
 
         switch (commentAddRequest.entityType()) {
-            case calendar -> {
-                calendarDAO.selectCalendarById(commentAddRequest.entityId()).orElseThrow(
-                        () -> new ResourceNotFoundException("calendar with [%s] not found".formatted(commentAddRequest.entityId()))
-                );
-            }
-            case event, speaker -> {
-                throw new RequestValidationException("unable to added comment due to invalid object type [%s]".formatted(commentAddRequest.entityType()));
-            }
+            case calendar -> calendarDAO.selectCalendarById(commentAddRequest.entityId()).orElseThrow(
+                    () -> new ResourceNotFoundException("calendar with [%s] not found".formatted(commentAddRequest.entityId()))
+            );
+            case event -> eventRepository.findById(commentAddRequest.entityId()).orElseThrow(
+                    () -> new ResourceNotFoundException("event with [%s] not found".formatted(commentAddRequest.entityId()))
+            );
+            case speaker -> throw new RequestValidationException("unable to added comment due to invalid object type [%s]".formatted(commentAddRequest.entityType()));
         }
 
         Comment comment = new Comment(

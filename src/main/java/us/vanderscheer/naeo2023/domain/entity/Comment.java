@@ -56,6 +56,7 @@ public class Comment {
     @PrePersist
     private void prePersist() {
         created = LocalDateTime.now();
+        updated = LocalDateTime.now();
     }
 
     @PreUpdate

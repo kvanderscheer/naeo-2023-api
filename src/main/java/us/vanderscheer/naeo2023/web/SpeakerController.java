@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,6 +45,7 @@ public class SpeakerController {
                     @ApiResponse(description = "Internal error", responseCode = "500", content = @Content)
             }
     )
+    @SecurityRequirement(name = "x-api-key")
     @GetMapping
     public List<SpeakerDTO> getSpeakers() {
         return speakerService.getSpeakers();
@@ -64,6 +66,7 @@ public class SpeakerController {
                     @ApiResponse(description = "Internal error", responseCode = "500", content = @Content)
             }
     )
+    @SecurityRequirement(name = "x-api-key")
     @GetMapping("/{speaker_id}")
     public SpeakerDTO getSpeaker(@PathVariable("speaker_id")
                                  @Parameter(description = "The ID of the speaker to find.")

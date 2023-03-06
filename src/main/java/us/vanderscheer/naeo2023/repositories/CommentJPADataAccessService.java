@@ -20,6 +20,11 @@ public class CommentJPADataAccessService implements CommentDAO {
     }
 
     @Override
+    public List<Comment> selectCommentsByEntity(UUID entityId) {
+        return commentRepository.findAllByEntityId(entityId);
+    }
+
+    @Override
     public Comment save(Comment comment) {
         return commentRepository.save(comment);
     }

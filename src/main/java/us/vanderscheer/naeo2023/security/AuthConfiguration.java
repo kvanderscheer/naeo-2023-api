@@ -24,6 +24,7 @@ public class AuthConfiguration extends WebSecurityConfiguration {
 
         http.authorizeRequests((requests) -> requests
                         .requestMatchers("/hello-world.html").permitAll()
+                        //.requestMatchers("/h2-console/**").permitAll()
                         .requestMatchers("/v1/**").authenticated()
                 )
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
